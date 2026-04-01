@@ -15,7 +15,7 @@ try:
     with tempfile.NamedTemporaryFile(dir=XApp.get_tmp_dir(), suffix=".png") as tempf:
         output = subprocess.check_output([
             "djxl", "--num_threads", "-1", "--quiet", t.args.input, tempf.name
-        ])
+        ], timeout=10)
 
         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(tempf.name, t.args.size, t.args.size, True)
         pixbuf.savev(t.args.output, "png")
